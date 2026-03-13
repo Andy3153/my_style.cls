@@ -21,12 +21,8 @@
 
 % <<< Memoir class settings
 \LoadClass[
- a4paper,        % paper size of 297 × 210 mm
  extrafontsizes, % using scalable fonts that can exceed 25pt
  *pt,            % custom size as the normal type size
- twoside,        % for when the document will be published with printing on both sides of the paper
- onecolumn,      % only one column of text on a page
- openany,        % a chapter may start on either a recto or verso page
 ]{memoir}
 % >>>
 
