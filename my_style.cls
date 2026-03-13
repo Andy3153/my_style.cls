@@ -13,24 +13,46 @@
 % >>>
 
 % <<< Class options
+% <<< Default values
+\def\mystyle@options@chapterstyle{article}
+\def\mystyle@options@fontsize{12}
+\def\mystyle@options@language{english}
+\def\mystyle@options@papersize{a4}
+% >>>
+
+% <<< Declare keys
+\DeclareKeys
+{
+ chapterstyle .store = \mystyle@options@chapterstyle,
+ fontsize     .store = \mystyle@options@fontsize,
+ language     .store = \mystyle@options@language,
+ papersize    .store = \mystyle@options@papersize,
+}
+% >>>
+
 % <<< Process options
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}} % pass options to base class if not defined
-\ProcessOptions\relax
+\DeclareUnknownKeyHandler{\PassOptionsToClass{\CurrentOption}{memoir}}
+\ProcessKeyOptions
 % >>>
 % >>>
 
 % <<< Memoir class settings
 \LoadClass[
- extrafontsizes, % using scalable fonts that can exceed 25pt
- *pt,            % custom size as the normal type size
+ \mystyle@options@fontsize pt,
+ \mystyle@options@papersize paper,
+ extrafontsizes,                   % using scalable fonts that can exceed 25pt
 ]{memoir}
 % >>>
 
 % <<< Packages
-\RequirePackage{expl3}    % LaTeX3 API
-\RequirePackage{etoolbox} % e-TeX tools for LaTeX
-\RequirePackage{fontspec} % advanced font selection in LuaLaTeX
-\RequirePackage{xcolor}   % color extensions for LaTeX
+\RequirePackage{expl3}      % LaTeX3 API
+\RequirePackage{etoolbox}   % e-TeX tools for LaTeX
+\RequirePackage{fontspec}   % advanced font selection in LuaLaTeX
+\RequirePackage{xcolor}     % color extensions for LaTeX
+\RequirePackage[
+ \mystyle@options@language,
+ provide*=*,
+]{babel}                    % multilingual support for LaTeX
 
 % <<< Conditionals to load packages
 \NewDocumentCommand\LoadPackagesForImages{}{\def\@LoadPackagesForImages{true}}
@@ -100,10 +122,6 @@
 % >>>
 % >>>
 
-% <<< Language
-\RequirePackage[english,romanian,provide*=*]{babel} % Romanian characters support
-% >>>
-
 % <<< Page layout
 \setlrmarginsandblock{25mm}{20mm}{*}   % spine and edge margins
 \setulmarginsandblock{20mm}{*}   {*}   % top and bottom margins
@@ -111,7 +129,7 @@
 \checkandfixthelayout                  % apply margin settings
 
 \setlength\parindent{10mm} % paragraph indentation
-\setlength\parskip{2mm}    % paragraph spacing
+\setlength\parskip  {2mm}  % paragraph spacing
 % >>>
 
 % <<< Document division styles
@@ -121,7 +139,7 @@
 % >>>
 
 % <<< Chapter
-\chapterstyle{article}
+\chapterstyle{\mystyle@options@chapterstyle}
 % >>>
 % >>>
 
