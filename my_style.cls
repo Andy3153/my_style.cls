@@ -32,6 +32,7 @@
 \def\mystyle@options@docstyleChapterClearpage  {false}
 \def\mystyle@options@docstyleChapterStyle      {article}
 \def\mystyle@options@docstylePageLayout        {oneside}
+\def\mystyle@options@docstyleSectioningOpen    {any}
 \def\mystyle@options@docstyleToCClearpageBefore{false}
 \def\mystyle@options@docstyleToCClearpageAfter {false}
 % >>>
@@ -52,6 +53,7 @@
  docstyleChapterClearpage   .store = \mystyle@options@docstyleChapterClearpage,
  docstyleChapterStyle       .store = \mystyle@options@docstyleChapterStyle,
  docstylePageLayout         .store = \mystyle@options@docstylePageLayout,
+ docstyleSectioningOpen     .store = \mystyle@options@docstyleSectioningOpen,
  docstyleToCClearpageBefore .store = \mystyle@options@docstyleToCClearpageBefore,
  docstyleToCClearpageAfter  .store = \mystyle@options@docstyleToCClearpageAfter,
 }
@@ -88,6 +90,23 @@
 \ifdefstring{\mystyle@options@docstylePageLayout}{twoside}
 {
  \PassOptionsToClass{twoside}{memoir}
+}{}
+% >>>
+
+% <<< docstyleSectioningOpen
+\ifdefstring{\mystyle@options@docstyleSectioningOpen}{any}
+{
+ \PassOptionsToClass{openany}{memoir}
+}{}
+
+\ifdefstring{\mystyle@options@docstyleSectioningOpen}{left}
+{
+ \PassOptionsToClass{openleft}{memoir}
+}{}
+
+\ifdefstring{\mystyle@options@docstyleSectioningOpen}{right}
+{
+ \PassOptionsToClass{openright}{memoir}
 }{}
 % >>>
 % >>>
