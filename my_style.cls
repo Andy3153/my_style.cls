@@ -12,37 +12,62 @@
 \ProvidesClass{my_style}[2026-03-13 Andy3153's personal LaTeX document style]
 % >>>
 
+% <<< Packages before class gets loaded
+\RequirePackage{expl3}      % LaTeX3 API
+\RequirePackage{etoolbox}   % e-TeX tools for LaTeX
+% >>>
+
 % <<< Class options
 % <<< Default values
-\def\mystyle@options@fontsize    {12}
-\def\mystyle@options@papersize   {a4}
-\def\mystyle@options@language    {english}
-\def\mystyle@options@chapterstyle{article}
+\def\mystyle@options@fontsize {12}
+\def\mystyle@options@papersize{a4}
+\def\mystyle@options@language {english}
 
 \def\mystyle@options@imagesupport{}
 \def\mystyle@options@mathsupport {}
 \def\mystyle@options@tablesupport{}
 \def\mystyle@options@urlsupport  {}
+
+\def\mystyle@options@docstyle                {article}
+\def\mystyle@options@docstyleChapterClearpage{false}
+\def\mystyle@options@docstyleChapterStyle    {article}
 % >>>
 
 % <<< Declare keys
 \DeclareKeys
 {
- fontsize     .store = \mystyle@options@fontsize,
- papersize    .store = \mystyle@options@papersize,
- language     .store = \mystyle@options@language,
- chapterstyle .store = \mystyle@options@chapterstyle,
+ fontsize  .store = \mystyle@options@fontsize,
+ papersize .store = \mystyle@options@papersize,
+ language  .store = \mystyle@options@language,
  %
  imagesupport .store = \mystyle@options@imagesupport,
  mathsupport  .store = \mystyle@options@mathsupport,
  tablesupport .store = \mystyle@options@tablesupport,
  urlsupport   .store = \mystyle@options@urlsupport,
+ %
+ docstyle                 .store = \mystyle@options@docstyle,
+ docstyleChapterClearpage .store = \mystyle@options@docstyleChapterClearpage,
+ docstyleChapterStyle     .store = \mystyle@options@docstyleChapterStyle,
 }
 % >>>
 
 % <<< Process options
 \DeclareUnknownKeyHandler{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessKeyOptions
+% >>>
+% >>>
+
+% <<< `docstyle` options before class gets loaded
+% <<< docstyle
+\ifdefstring{\mystyle@options@docstyle}{article}
+{
+ %\PassOptionsToClass{article}{memoir}
+ \PassOptionsToClass
+ {
+  docstyleChapterClearpage = false,
+  docstyleChapterStyle     = article,
+ }{my_style}
+}
 % >>>
 % >>>
 
@@ -54,9 +79,20 @@
 ]{memoir}
 % >>>
 
-% <<< Packages
-\RequirePackage{expl3}      % LaTeX3 API
-\RequirePackage{etoolbox}   % e-TeX tools for LaTeX
+% <<< `docstyle` options after class gets loaded
+% <<< docstyleChapterClearpage
+\ifdefstring{\mystyle@options@docstyleChapterClearpage}{false}
+{
+ \def\clearforchapter{}
+}{}
+% >>>
+
+% <<< docstyleChapterStyle
+\chapterstyle{\mystyle@options@docstyleChapterStyle}
+% >>>
+% >>>
+
+% <<< Packages after class gets loaded
 \RequirePackage{fontspec}   % advanced font selection in LuaLaTeX
 \RequirePackage{xcolor}     % color extensions for LaTeX
 \RequirePackage[
@@ -132,10 +168,6 @@
 % <<< Document division numbering depth
 \setsecnumdepth{subsubsection} %part
 \maxsecnumdepth{subsubsection}
-% >>>
-
-% <<< Chapter
-\chapterstyle{\mystyle@options@chapterstyle}
 % >>>
 % >>>
 
