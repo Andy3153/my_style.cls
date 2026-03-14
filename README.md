@@ -34,7 +34,7 @@ I have this many specific options because I always wanted a way to quickly contr
 | `urlsupport`                 | `false`   | load packages, custom macros and customizations for URLs |
 | `docstyle`                   | `article` | general document style `[ article \| book ]` |
 | `docstyleChapterClearpage`   | `false`   | whether to put chapter on a new page |
-| `docstyleChapterStyle`       | `article` | chapter heading style (see [memman.pdf](https://mirrors.nxthost.com/ctan/macros/latex/contrib/memoir/memman.pdf) sec. 6.5.1) |
+| `docstyleChapterStyle`       | `article` | chapter heading style [see [memman.pdf](https://mirrors.nxthost.com/ctan/macros/latex/contrib/memoir/memman.pdf) sec. B.1] |
 | `docstylePageLayout`         | `oneside` | page layout `[ oneside \| twoside ]` |
 | `docstyleSectioningOpen`     | `any`     | on which side should document divisions open `[ any \| left \| right ]` |
 | `docstyleTitleStyle`         | `default` | style of \maketitle `[ default \| eseuribacromana ]` |
