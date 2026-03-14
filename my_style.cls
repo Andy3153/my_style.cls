@@ -33,6 +33,7 @@
 \def\mystyle@options@docstyleChapterStyle      {article}
 \def\mystyle@options@docstylePageLayout        {oneside}
 \def\mystyle@options@docstyleSectioningOpen    {any}
+\def\mystyle@options@docstyleTitleStyle        {default}
 \def\mystyle@options@docstyleToCClearpageBefore{false}
 \def\mystyle@options@docstyleToCClearpageAfter {false}
 % >>>
@@ -54,6 +55,7 @@
  docstyleChapterStyle       .store = \mystyle@options@docstyleChapterStyle,
  docstylePageLayout         .store = \mystyle@options@docstylePageLayout,
  docstyleSectioningOpen     .store = \mystyle@options@docstyleSectioningOpen,
+ docstyleTitleStyle         .store = \mystyle@options@docstyleTitleStyle,
  docstyleToCClearpageBefore .store = \mystyle@options@docstyleToCClearpageBefore,
  docstyleToCClearpageAfter  .store = \mystyle@options@docstyleToCClearpageAfter,
 }
@@ -126,6 +128,112 @@
 ]{memoir}
 % >>>
 
+% <<< Title parameters
+% <<< Save default title commands if titlestyle is default
+\ifdefstring{\mystyle@options@docstyleTitleStyle}{default}
+{
+ \let\stdtitle\title
+ \let\stdauthor\author
+ \let\stddate\date
+}{}
+% >>>
+
+% <<< Define empty variables for title parameters
+\def\mystyle@titlestyle@parameters@author    {}
+\def\mystyle@titlestyle@parameters@date      {}
+\def\mystyle@titlestyle@parameters@projecturl{}
+\def\mystyle@titlestyle@parameters@title     {}
+% >>>
+
+% <<< Create new title commands
+\RenewDocumentCommand\title   {m}{\def\mystyle@titlestyle@parameters@title     {#1}}
+\RenewDocumentCommand\author  {m}{\def\mystyle@titlestyle@parameters@author    {#1}}
+\RenewDocumentCommand\date    {m}{\def\mystyle@titlestyle@parameters@date      {#1}}
+\NewDocumentCommand\projecturl{m}{\def\mystyle@titlestyle@parameters@projecturl{#1}}
+% >>>
+
+% <<< Write into default title commands if titlestyle is default
+\ifdefstring{\mystyle@options@docstyleTitleStyle}{default}
+{
+ \stdtitle {\mystyle@titlestyle@parameters@title}
+ \stdauthor{\mystyle@titlestyle@parameters@author}
+ \stddate  {\mystyle@titlestyle@parameters@date}
+}{}
+% >>>
+% >>>
+
+% <<< Title styles
+% <<< default
+% <<< Warnings
+\NewDocumentCommand\mystyle@titlestyle@warnings@default{}
+{
+ \ifdefstring{\mystyle@titlestyle@parameters@projecturl}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle default: \projecturl is unused for this titlestyle!}
+ }
+}
+% >>>
+% >>>
+
+% <<< eseuribacromana
+% https://github.com/Andy3153/eseuri_bac_romana
+% <<< Warnings
+\NewDocumentCommand\mystyle@titlestyle@warnings@eseuribacromana{}
+{
+ \ifdefstring{\mystyle@titlestyle@parameters@date}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle eseuribacromana: \date is unused for this titlestyle!}
+ }
+}
+% >>>
+
+% <<< Title style
+\NewDocumentCommand\mystyle@titlestyle@styles@eseuribacromana{}
+{
+ \begin{titlingpage}
+  \centering
+  \vspace*{40mm}
+
+  {
+   \Huge
+   \mystyle@titlestyle@parameters@title\par
+  }
+
+  \ifdefstring{\mystyle@titlestyle@parameters@author}{}
+  {}
+  {
+   \vspace{15mm}
+
+   \iflanguage{romanian}{de}
+   {
+    \iflanguage{english}{by}
+    {by}
+   }
+
+   \vspace{3mm}
+
+   {
+    \Large\textsc{\mystyle@titlestyle@parameters@author}
+   }
+  }
+
+  \ifdefstring{\mystyle@titlestyle@parameters@projecturl}{}
+  {}
+  {
+   \vfill
+
+   \inserturl{\mystyle@titlestyle@parameters@projecturl}\par
+
+   \vspace{20mm}
+  }
+ \end{titlingpage}
+}
+% >>>
+% >>>
+% >>>
+
 % <<< `docstyle` options after class gets loaded
 % <<< docstyleChapterClearpage
 \ifdefstring{\mystyle@options@docstyleChapterClearpage}{false}
@@ -136,6 +244,22 @@
 
 % <<< docstyleChapterStyle
 \chapterstyle{\mystyle@options@docstyleChapterStyle}
+% >>>
+
+% <<< docstyleTitleStyle
+\AtEndPreamble
+{
+ \ifdefstring{\mystyle@options@docstyleTitleStyle}{default}
+ {
+  \mystyle@titlestyle@warnings@default
+ }{}
+
+ \ifdefstring{\mystyle@options@docstyleTitleStyle}{eseuribacromana}
+ {
+  \mystyle@titlestyle@warnings@eseuribacromana
+  \RenewDocumentCommand\maketitle{}{\mystyle@titlestyle@styles@eseuribacromana}
+ }{}
+}
 % >>>
 
 % <<< docstyleToCClearpageBefore

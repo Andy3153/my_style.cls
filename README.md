@@ -7,6 +7,7 @@ This is my personal LaTeX document class. It's made to fit my document writing w
 - Based on the `memoir` document class.
 - Sane defaults.
 - Custom macros to make life easier.
+- Custom title styles
 - Thoroughly configurable through document class options.
 - Reproducible builds.
 <!-- }}} -->
@@ -36,6 +37,7 @@ I have this many specific options because I always wanted a way to quickly contr
 | `docstyleChapterStyle`       | `article` | chapter heading style (see [memman.pdf](https://mirrors.nxthost.com/ctan/macros/latex/contrib/memoir/memman.pdf) sec. 6.5.1) |
 | `docstylePageLayout`         | `oneside` | page layout `[ oneside \| twoside ]` |
 | `docstyleSectioningOpen`     | `any`     | on which side should document divisions open `[ any \| left \| right ]` |
+| `docstyleTitleStyle`         | `default` | style of \maketitle `[ default \| eseuribacromana ]` |
 | `docstyleToCClearpageBefore` | `false`   | whether to put ToC on a new page |
 | `docstyleToCClearpageAfter`  | `false`   | whether to put content after the ToC on a new page |
 <!-- }}} -->
@@ -115,6 +117,18 @@ Inserts a shortened, readable URL (it strips `scheme://`, leading `www.` and tra
 ```tex
 \inserturl{https://www.github.com/Andy3153/my_style.cls/} %will show up in the document as `github.com/Andy3153/my_style.cls`
 ```
+<!-- }}} -->
+<!-- }}} -->
+
+<!-- {{{ Title styles -->
+## Title styles
+I implemented custom title styles through the document class option `docstyleTitleStyle`. These completely replace the `\maketitle` command with different titles.
+
+<!-- {{{ table -->
+| title style       | parameters                         | description |
+| :-:               | :-:                                | :-:         |
+| `default`         | `\title`, `\author`, `\date`       | the default title style from the `memoir` document class |
+| `eseuribacromana` | `\title`, `\author`, `\projecturl` | the title style I made for "[Eseuri pentru bacalaureatul la Limba și Literatura Română](https://github.com/Andy3153/eseuri_bac_romana/blob/master/book/book.pdf)", adapted a little |
 <!-- }}} -->
 <!-- }}} -->
 
