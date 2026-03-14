@@ -69,15 +69,22 @@
 % <<< docstyle
 \ifdefstring{\mystyle@options@docstyle}{article}
 {
- %\PassOptionsToClass{article}{memoir}
- \PassOptionsToClass
- {
-  docstyleChapterClearpage   = false,
-  docstyleChapterStyle       = article,
-  docstylePageLayout         = oneside,
-  docstyleToCClearpageBefore = false,
-  docstyleToCClearpageAfter  = false,
- }{my_style}
+ \def\mystyle@options@docstyleChapterClearpage  {false}
+ \def\mystyle@options@docstyleChapterStyle      {article}
+ \def\mystyle@options@docstylePageLayout        {oneside}
+ \def\mystyle@options@docstyleSectioningOpen    {any}
+ \def\mystyle@options@docstyleToCClearpageBefore{false}
+ \def\mystyle@options@docstyleToCClearpageAfter {false}
+}
+
+\ifdefstring{\mystyle@options@docstyle}{book}
+{
+ \def\mystyle@options@docstyleChapterClearpage  {true}
+ \def\mystyle@options@docstyleChapterStyle      {hangnum}
+ \def\mystyle@options@docstylePageLayout        {twoside}
+ \def\mystyle@options@docstyleSectioningOpen    {right}
+ \def\mystyle@options@docstyleToCClearpageBefore{true}
+ \def\mystyle@options@docstyleToCClearpageAfter {true}
 }
 % >>>
 
@@ -216,7 +223,6 @@
 \checkandfixthelayout                  % apply margin settings
 
 \setlength\parindent{10mm} % paragraph indentation
-\setlength\parskip  {2mm}  % paragraph spacing
 % >>>
 
 % <<< Document division styles
