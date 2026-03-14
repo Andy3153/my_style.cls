@@ -28,9 +28,11 @@
 \def\mystyle@options@tablesupport{}
 \def\mystyle@options@urlsupport  {}
 
-\def\mystyle@options@docstyle                {article}
-\def\mystyle@options@docstyleChapterClearpage{false}
-\def\mystyle@options@docstyleChapterStyle    {article}
+\def\mystyle@options@docstyle                  {article}
+\def\mystyle@options@docstyleChapterClearpage  {false}
+\def\mystyle@options@docstyleChapterStyle      {article}
+\def\mystyle@options@docstyleToCClearpageBefore{false}
+\def\mystyle@options@docstyleToCClearpageAfter {false}
 % >>>
 
 % <<< Declare keys
@@ -45,9 +47,11 @@
  tablesupport .store = \mystyle@options@tablesupport,
  urlsupport   .store = \mystyle@options@urlsupport,
  %
- docstyle                 .store = \mystyle@options@docstyle,
- docstyleChapterClearpage .store = \mystyle@options@docstyleChapterClearpage,
- docstyleChapterStyle     .store = \mystyle@options@docstyleChapterStyle,
+ docstyle                   .store = \mystyle@options@docstyle,
+ docstyleChapterClearpage   .store = \mystyle@options@docstyleChapterClearpage,
+ docstyleChapterStyle       .store = \mystyle@options@docstyleChapterStyle,
+ docstyleToCClearpageBefore .store = \mystyle@options@docstyleToCClearpageBefore,
+ docstyleToCClearpageAfter  .store = \mystyle@options@docstyleToCClearpageAfter,
 }
 % >>>
 
@@ -64,8 +68,10 @@
  %\PassOptionsToClass{article}{memoir}
  \PassOptionsToClass
  {
-  docstyleChapterClearpage = false,
-  docstyleChapterStyle     = article,
+  docstyleChapterClearpage   = false,
+  docstyleChapterStyle       = article,
+  docstyleToCClearpageBefore = false,
+  docstyleToCClearpageAfter  = false,
  }{my_style}
 }
 % >>>
@@ -89,6 +95,21 @@
 
 % <<< docstyleChapterStyle
 \chapterstyle{\mystyle@options@docstyleChapterStyle}
+% >>>
+
+% <<< docstyleToCClearpageBefore
+\ifdefstring{\mystyle@options@docstyleToCClearpageBefore}{true}
+{
+ \let\stdtableofcontents\tableofcontents
+ \RenewDocumentCommand\tableofcontents{}{\cleardoublepage\stdtableofcontents}
+}{}
+% >>>
+
+% <<< docstyleToCClearpageAfter
+\ifdefstring{\mystyle@options@docstyleToCClearpageAfter}{true}
+{
+ \def\cfttocafterlisthook{\cleardoublepage}
+}{}
 % >>>
 % >>>
 
