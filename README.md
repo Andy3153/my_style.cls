@@ -137,9 +137,10 @@ I implemented custom title styles through the document class option `docstyleTit
 I created a template that is included in the repository. It documents all the options provided by the document class and contains the basic structure I use for all my documents.
 <!-- }}} -->
 
-<!-- {{{ Weird personal design decisions -->
-## Weird personal design decisions
+<!-- {{{ Weird design decisions -->
+## Weird design decisions
 As this is a personal project, it comes with things that might make zero sense to an outsider:
+- Potential errors are being handled on a best-effort basis.
 - All math is made to look like display math (`\everymath{\displaystyle}` and `\RenewDocumentCommand\frac{}{\displaystyle\stdfrac}`).
 - The multiplication symbol `\times` is disabled (`\let\times\empty`).
 - The epsilon symbol `\epsilon` is overridden by `\varepsilon` (`\let\epsilon\varepsilon`)
