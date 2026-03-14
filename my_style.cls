@@ -3,8 +3,8 @@
 %%
 %% My personal document class by Andy3153
 %%
-%% https://gitlab.com/Andy3153/my_style.cls
 %% https://github.com/Andy3153/my_style.cls
+%% https://gitlab.com/Andy3153/my_style.cls
 %%
 
 % <<< Class info
@@ -14,19 +14,29 @@
 
 % <<< Class options
 % <<< Default values
+\def\mystyle@options@fontsize    {12}
+\def\mystyle@options@papersize   {a4}
+\def\mystyle@options@language    {english}
 \def\mystyle@options@chapterstyle{article}
-\def\mystyle@options@fontsize{12}
-\def\mystyle@options@language{english}
-\def\mystyle@options@papersize{a4}
+
+\def\mystyle@options@imagesupport{}
+\def\mystyle@options@mathsupport {}
+\def\mystyle@options@tablesupport{}
+\def\mystyle@options@urlsupport  {}
 % >>>
 
 % <<< Declare keys
 \DeclareKeys
 {
- chapterstyle .store = \mystyle@options@chapterstyle,
  fontsize     .store = \mystyle@options@fontsize,
- language     .store = \mystyle@options@language,
  papersize    .store = \mystyle@options@papersize,
+ language     .store = \mystyle@options@language,
+ chapterstyle .store = \mystyle@options@chapterstyle,
+ %
+ imagesupport .store = \mystyle@options@imagesupport,
+ mathsupport  .store = \mystyle@options@mathsupport,
+ tablesupport .store = \mystyle@options@tablesupport,
+ urlsupport   .store = \mystyle@options@urlsupport,
 }
 % >>>
 
@@ -55,54 +65,40 @@
 ]{babel}                    % multilingual support for LaTeX
 
 % <<< Conditionals to load packages
-\NewDocumentCommand\LoadPackagesForImages{}{\def\@LoadPackagesForImages{true}}
-\NewDocumentCommand\LoadPackagesForTables{}{\def\@LoadPackagesForTables{true}}
-\NewDocumentCommand\LoadPackagesForMath{}{\def\@LoadPackagesForMath{true}}
-\NewDocumentCommand\LoadPackagesForURLs{}{\def\@LoadPackagesForURLs{true}}
-
 \AtEndPreamble
 {
- \@ifpackageloaded{graphicx}{\def\@LoadPackagesForImages{true}}{}
- \@ifpackageloaded{mathtools}{\def\@LoadPackagesForMath{true}}{}
- \@ifpackageloaded{hyperref}{\def\@LoadPackagesForURLs{true}}{}
+ \@ifpackageloaded{graphicx}{\def\mystyle@options@imagesupport{true}}{}
+ \@ifpackageloaded{mathtools}{\def\mystyle@options@mathsupport{true}}{}
+ \@ifpackageloaded{hyperref}{\def\mystyle@options@urlsupport{true}}{}
 }
 % >>>>
 
 % <<< For images
-\AtEndPreamble
+\ifdefstring{\mystyle@options@imagesupport}{true}
 {
- \ifdefstring{\@LoadPackagesForImages}{true}
- {
-  \RequirePackage{graphicx} % graphics support
-  \RequirePackage{float}    % better floating figures
-  \RequirePackage{caption}  % better figure captions
-  \RequirePackage{mdframed} % frames around figures
-  \RequirePackage{rotating} % float rotation
- }{}
-}
+ \RequirePackage{graphicx} % graphics support
+ \RequirePackage{float}    % better floating figures
+ \RequirePackage{caption}  % better figure captions
+ \RequirePackage{mdframed} % frames around figures
+ \RequirePackage{rotating} % float rotation
+}{}
 % >>>
 
 % <<< For tables
-\AtEndPreamble
+\ifdefstring{\mystyle@options@tablesupport}{true}
 {
- \ifdefstring{\@LoadPackagesForTables}{true}
- {
-  \RequirePackage{ltablex}  % table extensions
-  \RequirePackage{multirow} % table cells spanning multiple rows
-  \RequirePackage{siunitx}  % `S` column type
- }{}
-}
+ \RequirePackage{ltablex}  % table extensions
+ \RequirePackage{multirow} % table cells spanning multiple rows
+ \RequirePackage{siunitx}  % `S` column type
+}{}
 % >>>
 
 % <<< For math
-\AtEndPreamble
+\ifdefstring{\mystyle@options@mathsupport}{true}
 {
- \ifdefstring{\@LoadPackagesForMath}{true}
- {
-  \PassOptionsToPackage{fleqn}{mathtools} % mathematical tools to use with amsmath
-  %\RequirePackage{unicode-math}          % unicode mathematics support
- }{}
-}
+ \RequirePackage[fleqn]{mathtools} % mathematical tools to use with amsmath
+ %\RequirePackage{unicode-math}          % unicode mathematics support
+}{}
 % >>>
 
 % <<< For URLs
@@ -110,7 +106,7 @@
 {
  \RequirePackage{hyperref} % hypertext in LaTeX
 
- \ifdefstring{\@LoadPackagesForURLs}{true}
+ \ifdefstring{\mystyle@options@urlsupport}{true}
  {
   \PassOptionsToPackage{hyphens}{url}           % URLs will break at hyphens
   \PassOptionsToPackage{naturalnames}{hyperref} % LaTeX-computed names for links
@@ -203,7 +199,7 @@
 % <<< URLs
 \AtEndPreamble
 {
- \ifdefstring{\@LoadPackagesForURLs}{true}
+ \ifdefstring{\mystyle@options@urlsupport}{true}
  {
   \pdfstringdefDisableCommands
   {
@@ -227,7 +223,7 @@
 % <<< Math
 \AtEndPreamble
 {
- \ifdefstring{\@LoadPackagesForMath}{true}
+ \ifdefstring{\mystyle@options@mathsupport}{true}
  {
   % <<< Declare operator tg
   \DeclareMathOperator{\tg}{tg}
@@ -257,7 +253,7 @@
 % <<< Insert image
 \AtEndPreamble
 {
- \ifdefstring{\@LoadPackagesForImages}{true}
+ \ifdefstring{\mystyle@options@imagesupport}{true}
  {
   \NewDocumentCommand\insertimg{mO{}d<>}
   {
@@ -283,14 +279,14 @@
 % <<< Insert table
 \AtEndPreamble
 {
- \ifdefstring{\@LoadPackagesForTables}{true}
+ \ifdefstring{\mystyle@options@tablesupport}{true}
  {
   \NewDocumentCommand\inserttbl{md<>m}
   {
    \IfNoValueTF{#2}
    {
     \begin{table}[!ht]
-     \centering\xbp
+     \centering
      \begin{tabular}{#1}
       #3
      \end{tabular}
@@ -298,12 +294,11 @@
    }
    {
     \begin{table}[!ht]
-     \centering\xbp
-     \captionnamefont{\xbp\bfseries\itshape}
-     \captiontitlefont{\xbp\bfseries\itshape}
-     \RenewDocumentCommand\thetable{}{\arabic{table}}
+     \centering
+     \begin{tabular}{#1}
+      #3
+     \end{tabular}
      \caption{#2}
-     \begin{tabular}{#1} #3 \end{tabular}
     \end{table}
    }
   }
@@ -315,7 +310,7 @@
 \ExplSyntaxOn
 \AtEndPreamble
 {
- \ifdefstring{\@LoadPackagesForURLs}{true}
+ \ifdefstring{\mystyle@options@urlsupport}{true}
  {
   \NewDocumentCommand\inserturl{m}
   {

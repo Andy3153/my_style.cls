@@ -6,20 +6,25 @@
 
 % <<< Basic document settings
 \documentclass[
- fontsize  = 12,                 % font size
- papersize = a4,                 % paper size
- language  = {english,romanian}, % document langauges (last one is the main language)
- %draft,                         % draft mode
- %openany,                       % a chapter may start on either a recto or verso page
- %twoside,                       % for when the document will be published with printing on both sides of the paper
+ %fontsize  = 12,                 % font size
+ %papersize = a4,                 % paper size
+ %language  = {english,romanian}, % document langauges (last one is the main language)
+%
+ %chapterstyle = article % chapter heading style (see memman)
+%
+ %imagesupport = true, % load graphicx and other customizations
+ %mathsupport  = true, % load mathtools and other customizations
+ %tablesupport = true, % load packages for tables and other customizations
+ %urlsupport   = true, % load packages for URLs and other customizations
+%
+ %openany, % a chapter may start on either a recto or verso page
+ %twoside, % for when the document will be published with printing on both sides of the paper
+%
+ %draft, % draft mode
 ]{my_style}
 % >>>
 
 % <<< Packages
-%\usepackage{graphicx}  % graphics support
-%\usepackage{mathtools} % math utils
-%\usepackage{multicol}  % multi-column environment
-%\LoadPackagesForTables % load packages used for tables
 % >>>
 
 % <<< Other settings
@@ -36,7 +41,7 @@
 
 \begin{document}
  \maketitle       % generate title
- %\tableofcontents % generate ToC
+ \tableofcontents % generate ToC
 
  % <<< Document content
  Template
