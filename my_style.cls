@@ -31,6 +31,7 @@
 \def\mystyle@options@docstyle                  {article}
 \def\mystyle@options@docstyleChapterClearpage  {false}
 \def\mystyle@options@docstyleChapterStyle      {article}
+\def\mystyle@options@docstylePageLayout        {oneside}
 \def\mystyle@options@docstyleToCClearpageBefore{false}
 \def\mystyle@options@docstyleToCClearpageAfter {false}
 % >>>
@@ -50,6 +51,7 @@
  docstyle                   .store = \mystyle@options@docstyle,
  docstyleChapterClearpage   .store = \mystyle@options@docstyleChapterClearpage,
  docstyleChapterStyle       .store = \mystyle@options@docstyleChapterStyle,
+ docstylePageLayout         .store = \mystyle@options@docstylePageLayout,
  docstyleToCClearpageBefore .store = \mystyle@options@docstyleToCClearpageBefore,
  docstyleToCClearpageAfter  .store = \mystyle@options@docstyleToCClearpageAfter,
 }
@@ -70,10 +72,23 @@
  {
   docstyleChapterClearpage   = false,
   docstyleChapterStyle       = article,
+  docstylePageLayout         = oneside,
   docstyleToCClearpageBefore = false,
   docstyleToCClearpageAfter  = false,
  }{my_style}
 }
+% >>>
+
+% <<< docstylePageLayout
+\ifdefstring{\mystyle@options@docstylePageLayout}{oneside}
+{
+ \PassOptionsToClass{oneside}{memoir}
+}{}
+
+\ifdefstring{\mystyle@options@docstylePageLayout}{twoside}
+{
+ \PassOptionsToClass{twoside}{memoir}
+}{}
 % >>>
 % >>>
 
