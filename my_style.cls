@@ -223,12 +223,16 @@
 \NewDocumentCommand\mystyle@titlestyle@styles@eseuribacromana{}
 {
  \begin{titlingpage}
-  \centering
-  \vspace*{40mm}
-
+  \ifdefstring{\mystyle@titlestyle@parameters@title}{}
+  {}
   {
-   \Huge
-   \mystyle@titlestyle@parameters@title\par
+   \centering
+   \vspace*{40mm}
+
+   {
+    \Huge
+    \mystyle@titlestyle@parameters@title\par
+   }
   }
 
   \ifdefstring{\mystyle@titlestyle@parameters@author}{}
