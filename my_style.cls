@@ -2,9 +2,7 @@
 %% vim: set fenc=utf-8 ts=1 sw=0 sts=0 sr et si tw=0 fdm=marker fmr=<<<,>>>:
 %%
 %% My personal document class by Andy3153
-%%
 %% https://github.com/Andy3153/my_style.cls
-%% https://gitlab.com/Andy3153/my_style.cls
 %%
 
 % <<< Class info
