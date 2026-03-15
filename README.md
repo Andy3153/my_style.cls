@@ -9,6 +9,7 @@ This is my personal LaTeX document class. It's made to fit my document writing w
 - Custom macros to make life easier.
 - Custom title styles
 - Thoroughly configurable through document class options.
+  - The `docstyle` option unifies custom `article`- and `book`-like styles under the same codebase, switchable in an instant, while the individual `docstyle*` options allow fine-tuning each aspect independently to create a hybrid that fits the document at hand.
 - Reproducible builds.
 <!-- }}} -->
 
