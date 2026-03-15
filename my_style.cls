@@ -297,12 +297,14 @@
 % <<< Title style
 \NewDocumentCommand\mystyle@titlestyle@styles@scientificpaper{}
 {
+ \thispagestyle{plain}
+
  {
   \ifdefstring{\mystyle@titlestyle@parameters@title}{}
   {}
   {
    \centering
-   \vspace*{10mm}
+   \vspace*{1mm}
 
    {
     \LARGE\bfseries
