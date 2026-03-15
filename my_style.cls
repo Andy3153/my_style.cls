@@ -29,13 +29,13 @@
 \def\mystyle@options@urlsupport  {}
 
 \def\mystyle@options@docstyle                  {article}
-\def\mystyle@options@docstyleChapterClearpage  {false}
-\def\mystyle@options@docstyleChapterStyle      {article}
-\def\mystyle@options@docstylePageLayout        {oneside}
-\def\mystyle@options@docstyleSectioningOpen    {any}
-\def\mystyle@options@docstyleTitleStyle        {default}
-\def\mystyle@options@docstyleToCClearpageBefore{false}
-\def\mystyle@options@docstyleToCClearpageAfter {false}
+\def\mystyle@options@docstyleChapterClearpage  {__unset__}
+\def\mystyle@options@docstyleChapterStyle      {__unset__}
+\def\mystyle@options@docstylePageLayout        {__unset__}
+\def\mystyle@options@docstyleSectioningOpen    {__unset__}
+\def\mystyle@options@docstyleTitleStyle        {__unset__}
+\def\mystyle@options@docstyleToCClearpageBefore{__unset__}
+\def\mystyle@options@docstyleToCClearpageAfter {__unset__}
 % >>>
 
 % <<< Declare keys
@@ -44,12 +44,12 @@
  fontsize  .store = \mystyle@options@fontsize,
  papersize .store = \mystyle@options@papersize,
  language  .store = \mystyle@options@language,
- %
+%
  imagesupport .store = \mystyle@options@imagesupport,
  mathsupport  .store = \mystyle@options@mathsupport,
  tablesupport .store = \mystyle@options@tablesupport,
  urlsupport   .store = \mystyle@options@urlsupport,
- %
+%
  docstyle                   .store = \mystyle@options@docstyle,
  docstyleChapterClearpage   .store = \mystyle@options@docstyleChapterClearpage,
  docstyleChapterStyle       .store = \mystyle@options@docstyleChapterStyle,
@@ -69,25 +69,57 @@
 
 % <<< `docstyle` options before class gets loaded
 % <<< docstyle
+% <<< article
 \ifdefstring{\mystyle@options@docstyle}{article}
 {
- \def\mystyle@options@docstyleChapterClearpage  {false}
- \def\mystyle@options@docstyleChapterStyle      {article}
- \def\mystyle@options@docstylePageLayout        {oneside}
- \def\mystyle@options@docstyleSectioningOpen    {any}
- \def\mystyle@options@docstyleToCClearpageBefore{false}
- \def\mystyle@options@docstyleToCClearpageAfter {false}
-}
+ \ifdefstring{\mystyle@options@docstyleChapterClearpage}  {__unset__}
+  {\def\mystyle@options@docstyleChapterClearpage  {false}}
 
+ \ifdefstring{\mystyle@options@docstyleChapterStyle}      {__unset__}
+  {\def\mystyle@options@docstyleChapterStyle      {article}}
+
+ \ifdefstring{\mystyle@options@docstylePageLayout}        {__unset__}
+  {\def\mystyle@options@docstylePageLayout        {oneside}}
+
+ \ifdefstring{\mystyle@options@docstyleSectioningOpen}    {__unset__}
+  {\def\mystyle@options@docstyleSectioningOpen    {any}}
+
+ \ifdefstring{\mystyle@options@docstyleTitleStyle}        {__unset__}
+  {\def\mystyle@options@docstyleTitleStyle        {default}}
+
+ \ifdefstring{\mystyle@options@docstyleToCClearpageBefore}{__unset__}
+  {\def\mystyle@options@docstyleToCClearpageBefore{false}}
+
+ \ifdefstring{\mystyle@options@docstyleToCClearpageAfter} {__unset__}
+  {\def\mystyle@options@docstyleToCClearpageAfter {false}}
+}{}
+% >>>
+
+% <<< book
 \ifdefstring{\mystyle@options@docstyle}{book}
 {
- \def\mystyle@options@docstyleChapterClearpage  {true}
- \def\mystyle@options@docstyleChapterStyle      {hangnum}
- \def\mystyle@options@docstylePageLayout        {twoside}
- \def\mystyle@options@docstyleSectioningOpen    {right}
- \def\mystyle@options@docstyleToCClearpageBefore{true}
- \def\mystyle@options@docstyleToCClearpageAfter {true}
-}
+ \ifdefstring{\mystyle@options@docstyleChapterClearpage}  {__unset__}
+  {\def\mystyle@options@docstyleChapterClearpage  {true}}
+
+ \ifdefstring{\mystyle@options@docstyleChapterStyle}      {__unset__}
+  {\def\mystyle@options@docstyleChapterStyle      {hangnum}}
+
+ \ifdefstring{\mystyle@options@docstylePageLayout}        {__unset__}
+  {\def\mystyle@options@docstylePageLayout        {twoside}}
+
+ \ifdefstring{\mystyle@options@docstyleSectioningOpen}    {__unset__}
+  {\def\mystyle@options@docstyleSectioningOpen    {right}}
+
+ \ifdefstring{\mystyle@options@docstyleTitleStyle}        {__unset__}
+  {\def\mystyle@options@docstyleTitleStyle        {eseuribacromana}}
+
+ \ifdefstring{\mystyle@options@docstyleToCClearpageBefore}{__unset__}
+  {\def\mystyle@options@docstyleToCClearpageBefore{true}}
+
+ \ifdefstring{\mystyle@options@docstyleToCClearpageAfter} {__unset__}
+  {\def\mystyle@options@docstyleToCClearpageAfter {true}}
+}{}
+% >>>
 % >>>
 
 % <<< docstylePageLayout
