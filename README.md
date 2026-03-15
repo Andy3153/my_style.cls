@@ -38,7 +38,7 @@ I have this many specific options because I always wanted a way to quickly contr
 | `docstyleChapterStyle`       | `article` | chapter heading style [see [memman.pdf](https://mirrors.nxthost.com/ctan/macros/latex/contrib/memoir/memman.pdf) sec. B.1] |
 | `docstylePageLayout`         | `oneside` | page layout `[ oneside \| twoside ]` |
 | `docstyleSectioningOpen`     | `any`     | on which side should document divisions open `[ any \| left \| right ]` |
-| `docstyleTitleStyle`         | `default` | style of \maketitle `[ default \| eseuribacromana ]` |
+| `docstyleTitleStyle`         | `default` | style of \maketitle `[ default \| eseuribacromana \| scientificpaper ]` |
 | `docstyleToCClearpageBefore` | `false`   | whether to put ToC on a new page |
 | `docstyleToCClearpageAfter`  | `false`   | whether to put content after the ToC on a new page |
 <!-- }}} -->
@@ -126,10 +126,11 @@ Inserts a shortened, readable URL (it strips `scheme://`, leading `www.` and tra
 I implemented custom title styles through the document class option `docstyleTitleStyle`. These completely replace the `\maketitle` command with different titles.
 
 <!-- {{{ table -->
-| title style       | parameters                         | description |
-| :-:               | :-:                                | :-:         |
-| `default`         | `\title`, `\author`, `\date`       | the default title style from the `memoir` document class |
-| `eseuribacromana` | `\title`, `\author`, `\projecturl` | the title style I made for "[Eseuri pentru bacalaureatul la Limba și Literatura Română](https://github.com/Andy3153/eseuri_bac_romana/blob/master/book/book.pdf)", adapted a little |
+| title style       | parameters                                      | description |
+| :-:               | :-:                                             | :-:         |
+| `default`         | `\title`, `\author`, `\date`                    | the default title style from the `memoir` document class |
+| `eseuribacromana` | `\title`, `\author`, `\projecturl`              | the title style I made for "[Eseuri pentru bacalaureatul la Limba și Literatura Română](https://github.com/Andy3153/eseuri_bac_romana/blob/master/book/book.pdf)", adapted a little |
+| `scientificpaper` | `\title`, `\author`, `\moreinfo`, `\projecturl` | the title style I made for "[Phone Controlled Car](https://github.com/Andy3153/phone-controlled-car/blob/master/doc/doc.pdf)" |
 <!-- }}} -->
 <!-- }}} -->
 

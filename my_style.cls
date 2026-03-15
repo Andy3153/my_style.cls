@@ -171,15 +171,17 @@
 % <<< Define empty variables for title parameters
 \def\mystyle@titlestyle@parameters@author    {}
 \def\mystyle@titlestyle@parameters@date      {}
+\def\mystyle@titlestyle@parameters@moreinfo  {}
 \def\mystyle@titlestyle@parameters@projecturl{}
 \def\mystyle@titlestyle@parameters@title     {}
 % >>>
 
 % <<< Create new title commands
-\RenewDocumentCommand\title   {m}{\def\mystyle@titlestyle@parameters@title     {#1}}
 \RenewDocumentCommand\author  {m}{\def\mystyle@titlestyle@parameters@author    {#1}}
 \RenewDocumentCommand\date    {m}{\def\mystyle@titlestyle@parameters@date      {#1}}
+\NewDocumentCommand\moreinfo  {m}{\def\mystyle@titlestyle@parameters@moreinfo  {#1}}
 \NewDocumentCommand\projecturl{m}{\def\mystyle@titlestyle@parameters@projecturl{#1}}
+\RenewDocumentCommand\title   {m}{\def\mystyle@titlestyle@parameters@title     {#1}}
 % >>>
 
 % <<< Write into default title commands if titlestyle is default
@@ -197,6 +199,12 @@
 % <<< Warnings
 \NewDocumentCommand\mystyle@titlestyle@warnings@default{}
 {
+ \ifdefstring{\mystyle@titlestyle@parameters@moreinfo}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle default: \moreinfo is unused for this titlestyle!}
+ }
+
  \ifdefstring{\mystyle@titlestyle@parameters@projecturl}{}
  {}
  {
@@ -215,6 +223,12 @@
  {}
  {
   \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle eseuribacromana: \date is unused for this titlestyle!}
+ }
+
+ \ifdefstring{\mystyle@titlestyle@parameters@moreinfo}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle eseuribacromana: \moreinfo is unused for this titlestyle!}
  }
 }
 % >>>
@@ -266,6 +280,78 @@
 }
 % >>>
 % >>>
+
+% <<< scientificpaper
+% https://github.com/Andy3153/phone-controlled-car
+% <<< Warnings
+\NewDocumentCommand\mystyle@titlestyle@warnings@scientificpaper{}
+{
+ \ifdefstring{\mystyle@titlestyle@parameters@date}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle scientificpaper: \date is unused for this titlestyle!}
+ }
+}
+% >>>
+
+% <<< Title style
+\NewDocumentCommand\mystyle@titlestyle@styles@scientificpaper{}
+{
+ {
+  \ifdefstring{\mystyle@titlestyle@parameters@title}{}
+  {}
+  {
+   \centering
+   \vspace*{10mm}
+
+   {
+    \LARGE\bfseries
+    \mystyle@titlestyle@parameters@title\par
+   }
+  }
+
+  \ifdefstring{\mystyle@titlestyle@parameters@author}{}
+  {}
+  {
+   \vspace{5mm}
+
+   {
+    \Large
+    \mystyle@titlestyle@parameters@author\par
+   }
+  }
+
+  \ifdefstring{\mystyle@titlestyle@parameters@moreinfo}{}
+  {}
+  {
+   \vspace{3mm}
+
+   {
+    \small
+    \mystyle@titlestyle@parameters@moreinfo\par
+   }
+  }
+
+  \ifdefstring{\mystyle@titlestyle@parameters@projecturl}{}
+  {}
+  {
+   \vspace{2mm}
+
+   {
+    \small
+    Project link: \inserturl{\mystyle@titlestyle@parameters@projecturl}\par
+   }
+  }
+
+  \ifdefstring{\mystyle@titlestyle@parameters@title}{}
+  {}
+  {
+   \vspace{10mm}
+  }
+ }
+}
+% >>>
+% >>>
 % >>>
 
 % <<< `docstyle` options after class gets loaded
@@ -292,6 +378,12 @@
  {
   \mystyle@titlestyle@warnings@eseuribacromana
   \RenewDocumentCommand\maketitle{}{\mystyle@titlestyle@styles@eseuribacromana}
+ }{}
+
+ \ifdefstring{\mystyle@options@docstyleTitleStyle}{scientificpaper}
+ {
+  \mystyle@titlestyle@warnings@scientificpaper
+  \RenewDocumentCommand\maketitle{}{\mystyle@titlestyle@styles@scientificpaper}
  }{}
 }
 % >>>
