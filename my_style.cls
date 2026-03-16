@@ -21,10 +21,10 @@
 \def\mystyle@options@papersize{a4}
 \def\mystyle@options@language {english}
 
-\def\mystyle@options@imagesupport{}
-\def\mystyle@options@mathsupport {}
-\def\mystyle@options@tablesupport{}
-\def\mystyle@options@urlsupport  {}
+\def\mystyle@options@imagesupport{__unset__}
+\def\mystyle@options@mathsupport {__unset__}
+\def\mystyle@options@tablesupport{__unset__}
+\def\mystyle@options@urlsupport  {__unset__}
 
 \def\mystyle@options@docstyle                  {article}
 \def\mystyle@options@docstyleChapterClearpage  {__unset__}
@@ -65,7 +65,15 @@
 % >>>
 % >>>
 
-% <<< `docstyle` options before class gets loaded
+% <<< Class options before memoir class gets loaded
+% <<< fontsize
+\PassOptionsToClass{\mystyle@options@fontsize pt}{memoir}
+% >>>
+
+% <<< papersize
+\PassOptionsToClass{\mystyle@options@papersize paper}{memoir}
+% >>>
+
 % <<< docstyle
 % <<< article
 \ifdefstring{\mystyle@options@docstyle}{article}
@@ -152,9 +160,7 @@
 
 % <<< Memoir class settings
 \LoadClass[
- \mystyle@options@fontsize pt,
- \mystyle@options@papersize paper,
- extrafontsizes,                   % using scalable fonts that can exceed 25pt
+ extrafontsizes, % using scalable fonts that can exceed 25pt
 ]{memoir}
 % >>>
 
@@ -356,7 +362,7 @@
 % >>>
 % >>>
 
-% <<< `docstyle` options after class gets loaded
+% <<< Class options after memoir class gets loaded
 % <<< docstyleChapterClearpage
 \ifdefstring{\mystyle@options@docstyleChapterClearpage}{false}
 {
