@@ -129,14 +129,35 @@ I implemented custom title styles through the document class option `docstyleTit
 | title style       | parameters                                      | description |
 | :-:               | :-:                                             | :-:         |
 | `default`         | `\title`, `\author`, `\date`                    | the default title style from the `memoir` document class |
-| `eseuribacromana` | `\title`, `\author`, `\projecturl`              | the title style I made for "[Eseuri pentru bacalaureatul la Limba și Literatura Română](https://github.com/Andy3153/eseuri_bac_romana/blob/master/book/book.pdf)", adapted a little |
-| `scientificpaper` | `\title`, `\author`, `\moreinfo`, `\projecturl` | the title style I made for "[Phone Controlled Car](https://github.com/Andy3153/phone-controlled-car/blob/master/doc/doc.pdf)" |
+| `eseuribacromana` | `\title`, `\author`, `\projecturl`              | the title style I made for ["Eseuri pentru bacalaureatul la Limba și Literatura Română"](https://github.com/Andy3153/eseuri_bac_romana/blob/master/book/book.pdf), adapted a little |
+| `scientificpaper` | `\title`, `\author`, `\moreinfo`, `\projecturl` | the title style I made for ["Phone Controlled Car"](https://github.com/Andy3153/phone-controlled-car/blob/master/doc/doc.pdf) |
 <!-- }}} -->
 <!-- }}} -->
 
 <!-- {{{ Template -->
 ## Template
 I created a template that is included in the repository. It documents all the options provided by the document class and contains the basic structure I use for all my documents.
+<!-- }}} -->
+
+<!-- {{{ Documents written with this document class -->
+## Documents written with this document class
+Here's a list of documents I have written and published that use this document class:
+
+<!-- {{{ "Eseuri pentru bacalaureatul la Limba și Literatura Română" -->
+### "Eseuri pentru bacalaureatul la Limba și Literatura Română"
+| [repo](https://github.com/Andy3153/eseuri_bac_romana) | [view](https://github.com/Andy3153/eseuri_bac_romana/blob/master/book/book.pdf) | [download](https://github.com/Andy3153/eseuri_bac_romana/raw/master/book/book.pdf) |
+| :-: | :-: | :-: |
+
+This document is the reason I went and made this repository, it's my first ever serious document I wrote with LaTeX. It uses a very early version of the code in this repo, prior to me turning it into a `memoir`-based document class, it was a package to use over the basic `article` and `book` document classes.
+<!-- }}} -->
+
+<!-- {{{ "Phone Controlled Car" -->
+### "Phone Controlled Car"
+| [repo](https://github.com/Andy3153/phone-controlled-car) | [view](https://github.com/Andy3153/phone-controlled-car/blob/master/doc/doc.pdf) | [download](https://github.com/Andy3153/phone-controlled-car/raw/master/doc/doc.pdf) |
+| :-: | :-: | :-: |
+
+This document is what pushed me to go do the work to rewrite everything from a package to a full-on document class. Also a good showcase of the `scientificpaper` titlestyle.
+<!-- }}} -->
 <!-- }}} -->
 
 <!-- {{{ Weird design decisions -->
