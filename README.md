@@ -171,5 +171,5 @@ As this is a personal project, it comes with things that might make zero sense t
 
 <!-- {{{ License -->
 ## License
-This repository is licensed under the GNU General Public License v3.0 (GPL-3.0). See the LICENSE file for details.
+This repository is licensed under the GNU General Public License v3.0 (GPL-3.0). See the [`LICENSE`](LICENSE) file for details.
 <!-- }}} -->
