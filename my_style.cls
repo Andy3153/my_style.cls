@@ -360,6 +360,59 @@
 }
 % >>>
 % >>>
+
+% <<< uniproject
+% <<< Warnings
+\NewDocumentCommand\mystyle@titlestyle@warnings@uniproject{}
+{
+ \ifdefstring{\mystyle@titlestyle@parameters@author}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle uniproject: \author is unused for this titlestyle!}
+ }
+
+ \ifdefstring{\mystyle@titlestyle@parameters@date}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle uniproject: \date is unused for this titlestyle!}
+ }
+
+ \ifdefstring{\mystyle@titlestyle@parameters@projecturl}{}
+ {}
+ {
+  \GenericWarning{}{LaTeX Warning: my_style.cls: titlestyle default: \projecturl is unused for this titlestyle!}
+ }
+}
+% >>>
+
+% <<< Title style
+\NewDocumentCommand\mystyle@titlestyle@styles@uniproject{}
+{
+ \begin{titlingpage}
+  \ifdefstring{\mystyle@titlestyle@parameters@title}{}
+  {}
+  {
+   \vspace*{60mm}
+   \centering\Huge
+   \mystyle@titlestyle@parameters@title\par
+  }
+
+  \ifdefstring{\mystyle@titlestyle@parameters@moreinfo}{}
+  {}
+  {
+   \vfill
+   \large
+   \begin{flushright}
+    \begin{tabular}{l}
+     \mystyle@titlestyle@parameters@moreinfo
+    \end{tabular}
+   \end{flushright}
+   \vspace{10mm}
+  }
+ \end{titlingpage}
+}
+% >>>
+% >>>
 % >>>
 
 % <<< Class options after memoir class gets loaded
@@ -392,6 +445,12 @@
  {
   \mystyle@titlestyle@warnings@scientificpaper
   \RenewDocumentCommand\maketitle{}{\mystyle@titlestyle@styles@scientificpaper}
+ }{}
+
+ \ifdefstring{\mystyle@options@docstyleTitleStyle}{uniproject}
+ {
+  \mystyle@titlestyle@warnings@uniproject
+  \RenewDocumentCommand\maketitle{}{\mystyle@titlestyle@styles@uniproject}
  }{}
 }
 % >>>
